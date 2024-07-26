@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="keywords"
+      content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template"
+    />
+    <meta
+      name="description"
+      content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/images/favicon.png"
+    />
+    <!-- Custom CSS -->
+    <link
+      href="../assets/libs/jquery-steps/jquery.steps.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/libs/jquery-steps/steps.css" rel="stylesheet" />
+    <link href="../dist/css/style.min.css" rel="stylesheet" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Include the custom CSS here or in your stylesheet */
+      .card {
+        margin: auto;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+      }
+      .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: 250px;
+        object-fit: contain;
+      }
+      .card-body {
+        padding: 10px;
+      }
+      .card-title {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+      .card-text {
+        margin-bottom: 10px;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+      <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div
+      id="main-wrapper"
+      data-layout="vertical"
+      data-navbarbg="skin5"
+      data-sidebartype="full"
+      data-sidebar-position="absolute"
+      data-header-position="absolute"
+      data-boxed-layout="full"
+    >
+      <!-- ============================================================== -->
+      <!-- Topbar header - style you can find in pages.scss -->
+      <!-- ============================================================== -->
+
+      <%- include('./partials/header.ejs')%>
+
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+
+      <%- include('./partials/aside.ejs')%>
+
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+          <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+              <h4 class="page-title">Products</h4>
+              <div class="ms-auto text-end">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      Library
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+          <div id="main-wrapper">
+            <div class="row">
+              <% products.map((ele) => { %>
+              <div class="col-md-4 mt-3">
+                <div class="card">
+                  <img
+                    class="card-img-top"
+                    src="<%= ele.image %>"
+                    alt="Product Image"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title"><%= ele.title %></h5>
+                    <p class="card-text"><%= ele.description %></p>
+                    <p class="card-text">
+                      <strong>Price: $<%= ele.price %></strong>
+                    </p>
+                    <a
+                      href="/deleteproduct/<%= ele._id %>"
+                      class="btn btn-primary"
+                      >DELETE</a
+                    >
+                    <button
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#editProductModal"
+                      data-id="<%= ele._id %>"
+                      data-title="<%= ele.title %>"
+                      data-description="<%= ele.description %>"
+                      data-price="<%= ele.price %>"
+                      data-image="<%= ele.image %>"
+                    >
+                      EDIT
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer text-center">
+          All Rights Reserved by Matrix-admin. Designed and Developed by
+          <a href="https://www.wrappixel.com">WrapPixel</a>.
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="editProductModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editProductModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editProductForm" action="/editProduct/<%= products._id %>" method="post" enctype="multipart/form-data">
+              <% products.map((ele)=>{ %>
+              <input type="hidden" id="productId" name="productId" value="<%= ele._id %>" />
+
+              <div class="form-group">
+                <label for="productTitle">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productTitle"
+                  value="<%= ele.title %>"
+                  name="title"
+                />
+              </div>
+              <div class="form-group">
+                <label for="productDescription">Description</label>
+                <textarea
+                  class="form-control"
+                  id="productDescription"
+                  name="description"
+                ><%= ele.description %></textarea>
+              </div>
+              <div class="form-group">
+                <label for="productPrice">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="productPrice"
+                  name="price"
+                  value="<%= ele.price %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="productImage">Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="productImage"
+                  name="image"
+                  value="<%= ele.image %>"
+                />
+                <img src="<%= ele.image %>" alt="" height="100px">
+              </div>
+              <div class="form-group">
+                <% }) %>
+                <select
+                  name="CategoryId"
+                  class="form-control"
+                  id="itemCategory"
+                  required
+                >
+                  <% for(const category of cat){%>
+                  <option value="<%= category._id %>" selected>
+                    <%= category.name %>
+                  </option>
+                  <% } %>
+                </select>
+              </div>
+              <div class="form-group">
+                <select
+                  name="SubCategoryId"
+                  class="form-control"
+                  id="itemSubCategory"
+                  required
+                >
+                  <% for(const subcategory of subcat){%>
+                  <option value="<%= subcategory._id %>" selected>
+                    <%= subcategory.name %>
+                  </option>
+                  <% } %>
+                </select>
+              </div>
+              <input type="submit" class="btn btn-primary">
+              </input>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Jquery -->
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="../dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../dist/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="../assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="../assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $('#editProductModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var title = button.data('title');
+        var description = button.data('description');
+        var price = button.data('price');
+        var image = button.data('image');
+
+        var modal = $(this);
+        modal.find('#productId').val(id);
+        modal.find('#productTitle').val(title);
+        modal.find('#productDescription').val(description);
+        modal.find('#productPrice').val(price);
+        modal.find('#productImage').val(image);
+      });
+    </script>
+  </body>
+</html>
