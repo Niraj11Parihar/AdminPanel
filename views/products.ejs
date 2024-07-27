@@ -47,7 +47,7 @@
 
       .card-img-top {
         width: 100%;
-        height: 250px;
+        height: 200px;
         object-fit: contain;
       }
       .card-body {
@@ -150,6 +150,7 @@
                     class="card-img-top"
                     src="<%= ele.image %>"
                     alt="Product Image"
+                    height="100px"
                   />
                   <div class="card-body">
                     <h5 class="card-title"><%= ele.title %></h5>
@@ -163,17 +164,18 @@
                       >DELETE</a
                     >
                     <button
-                      class="btn btn-primary"
-                      data-toggle="modal"
-                      data-target="#editProductModal"
-                      data-id="<%= ele._id %>"
-                      data-title="<%= ele.title %>"
-                      data-description="<%= ele.description %>"
-                      data-price="<%= ele.price %>"
-                      data-image="<%= ele.image %>"
-                    >
-                      EDIT
-                    </button>
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#editProductModal"
+                    data-id="<%= ele._id %>"
+                    data-title="<%= ele.title %>"
+                    data-description="<%= ele.description %>"
+                    data-price="<%= ele.price %>"
+                    data-image="<%= ele.image %>"
+                  >
+                    EDIT
+                  </button>
+                  
                   </div>
                 </div>
               </div>
@@ -227,9 +229,8 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="editProductForm" action="/editProduct/<%= products._id %>" method="post" enctype="multipart/form-data">
-              <% products.map((ele)=>{ %>
-              <input type="hidden" id="productId" name="productId" value="<%= ele._id %>" />
+            <form id="editProductForm" action="/updateProduct" method="post" enctype="multipart/form-data">
+              <input type="hidden" id="productId" name="productId" value="" />
 
               <div class="form-group">
                 <label for="productTitle">Title</label>
@@ -237,7 +238,7 @@
                   type="text"
                   class="form-control"
                   id="productTitle"
-                  value="<%= ele.title %>"
+                  value=""
                   name="title"
                 />
               </div>
@@ -247,7 +248,7 @@
                   class="form-control"
                   id="productDescription"
                   name="description"
-                ><%= ele.description %></textarea>
+                ></textarea>
               </div>
               <div class="form-group">
                 <label for="productPrice">Price</label>
@@ -256,7 +257,7 @@
                   class="form-control"
                   id="productPrice"
                   name="price"
-                  value="<%= ele.price %>"
+                  value=""
                 />
               </div>
               <div class="form-group">
@@ -266,12 +267,11 @@
                   class="form-control"
                   id="productImage"
                   name="image"
-                  value="<%= ele.image %>"
+                  value=""
                 />
-                <img src="<%= ele.image %>" alt="" height="100px">
+                <img src="" alt="" height="100px">
               </div>
               <div class="form-group">
-                <% }) %>
                 <select
                   name="CategoryId"
                   class="form-control"
@@ -327,20 +327,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
       $('#editProductModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
+        var button = $(event.relatedTarget); // Button that triggered the modal
         var id = button.data('id');
         var title = button.data('title');
         var description = button.data('description');
         var price = button.data('price');
         var image = button.data('image');
-
+        
         var modal = $(this);
         modal.find('#productId').val(id);
         modal.find('#productTitle').val(title);
         modal.find('#productDescription').val(description);
         modal.find('#productPrice').val(price);
-        modal.find('#productImage').val(image);
+        console.log(id);
+        // Handle image display if needed
+        // modal.find('#productImage').attr('src', image);
       });
     </script>
+    
   </body>
 </html>

@@ -22,7 +22,7 @@ const P_router = Router();
 
 P_router.post("/addProduct", uploads, addProduct);
 P_router.get("/products", productView);
-P_router.post("/updateProduct/:id", uploads, editProduct);
+P_router.post("/updateProduct", uploads, editProduct);
 P_router.get("/deleteProduct/:id", deleteProduct);
 
 module.exports = P_router;

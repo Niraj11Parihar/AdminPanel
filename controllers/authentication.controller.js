@@ -1,6 +1,7 @@
 
 // Whole authentication process is here
 
+const { createToken } = require("../middleware/authbyjwt");
 const userModel = require("../models/user.schema");
 
 const loginpage = async (req, res) => {
@@ -18,6 +19,8 @@ const loginpage = async (req, res) => {
           res.send("Invalid username");
         } else {
           if (validUser.password === req.body.password) {
+            const token = createToken(validUser);
+            res.cookie("token",token);
             res.render("index");
           } else {
             res.send("Invalid password");

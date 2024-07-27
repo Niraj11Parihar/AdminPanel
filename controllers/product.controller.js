@@ -21,10 +21,10 @@ const productView = async (req, res) => {
       .populate("CategoryId")
       .populate("SubCategoryId")
       .populate("ExtraCategoryId");
-    const categories = await CategoryModel.find({});
-    const subcategories = await SubCategoryModel.find({});
+    const cat = await CategoryModel.find({});
+    const subcat = await SubCategoryModel.find({});
     
-    res.render("products", { products, categories, subcategories });
+    res.render("products", { products, cat, subcat});
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).send("Error fetching products");
@@ -33,15 +33,16 @@ const productView = async (req, res) => {
 
 const editProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { title, description, price, CategoryId, SubCategoryId } = req.body;
+    const { productId,title, description, price, CategoryId, SubCategoryId } = req.body;
+    
     const updateData = { title, description, price, CategoryId, SubCategoryId };
+    console.log(updateData)
 
     if (req.file) {
       updateData.image = req.file.path;
     }
 
-    const updatedProduct = await ProductModel.findByIdAndUpdate(id, updateData, { new: true });
+    const updatedProduct = await ProductModel.findByIdAndUpdate(productId, updateData, { new: true });
 
     if (!updatedProduct) {
       return res.status(404).send("Product not found");
@@ -68,7 +69,6 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   addProduct,
   productView,
-  getDataEdit,
-  editProduct,
+  editProduct,  
   deleteProduct,
 };
