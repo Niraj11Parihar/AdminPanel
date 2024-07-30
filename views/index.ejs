@@ -26,18 +26,37 @@
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <style>
+      .alert {
+          position: fixed;
+          top: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 300px;
+          height: 50px;
+          border: 1px solid #d4edda;
+          border-radius: 5px;
+          background-color: #d4edda;
+          color: #155724;
+          z-index: 9999;
+          box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+  </style>
   </head>
 
   <body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    <% if ( messages.length > 0) { %>
+      <div class="alert text-center" id="messages">
+        <p class="my-0"><%= messages[0] %></p>
+      </div>
+   <% } %>
     <div class="preloader">
       <div class="lds-ripple">
         <div class="lds-pos"></div>
@@ -1361,5 +1380,14 @@
     <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="../dist/js/pages/chart/chart-page-init.js"></script>
+    <script>
+      const messageele = document.getElementById('messages');
+
+      setTimeout(()=>{
+       if(messageele){
+        messageele.style.display = 'none';
+       }
+      },1500)
+    </script>
   </body>
 </html>

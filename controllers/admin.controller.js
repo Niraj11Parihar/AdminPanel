@@ -16,7 +16,7 @@ const productaddpage = async (req, res) => {
     let cat = await CategoryModel.find({});
     let subcat = await SubCategoryModel.find({});
     let extracat = await ExtraCategoryModel.find({});
-    res.render("./pages/addproduct", { cat, subcat, extracat });
+    res.render("./pages/addproduct", { cat, subcat, extracat },{messages : req.flash('productadded')});
   } catch (error) {
     console.log(error);
   }
@@ -33,5 +33,5 @@ const CategoryFormPage = async (req, res) => {
 module.exports = {
   productaddpage,
   CategoryFormPage,
-  // index
+  index
 };

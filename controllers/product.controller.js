@@ -8,7 +8,8 @@ const addProduct = async (req, res) => {
   try {
     const data = await ProductModel.create({ ...req.body, image: req.file.path });
     console.log(data);
-    return res.redirect("back");
+    req.flash('productadded',"Product is Added")
+    return res.redirect("back",{ messages : req.flash('productadded')});
   } catch (error) {
     console.error("Error adding product:", error);
     res.status(500).send("Product not added");
